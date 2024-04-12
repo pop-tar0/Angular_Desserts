@@ -1,0 +1,85 @@
+<div class="row" style="margin-bottom: 50px;">
+    <div class="form-block p-3">
+        <div class="form-row p-3">
+            <div class="col"><span class="page-title">付款</span></div>
+            <div class="col d-flex justify-content-between align-items-center progress-line"
+                style="position: relative;">
+                <div class="dot-complete">
+                    <div class="dot-check" style="position: relative;">
+                        <i class="fa-solid fa-check" style="color: #3F5D45;"></i>
+                    </div>
+                </div>
+                <div class="dot">
+                    <div class="dot-active"></div>
+                </div>
+                <div class="dot"></div>
+            </div>
+        </div>
+        <div class="container">
+            <label for="CardNumber" class="form-label form-label">信用卡卡號</label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-box" id="CardUser"
+                                placeholder="1234-5678-9012-3456" style="border: 0;" [(ngModel)]="receiveCredit">
+                            <span class="input-group-text rounded-0" id="basic-addon1"
+                                style="background-color:#EAF0ED; border-color: #EAF0ED;">
+                                <i class="fa-solid fa-credit-card" style="color: #3F5D45;"></i>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <label for="CardUser" class="form-label form-label">持卡人姓名</label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-box" id="CardUser" placeholder="王"
+                            [(ngModel)]="receiveLastName">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-box" placeholder="大明"
+                            [(ngModel)]="receiveFirstName">
+                    </div>
+                </div>
+            </div>
+
+
+            <label for="address" class="form-label form-label">有效期限</label>
+            <div class="form-row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <select class="form-control rounded-0 input-box" name="month" id="month"
+                            [(ngModel)]="CardValidMonth">
+                            <option value="month" *ngFor="let mon of month">{{ mon }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-box" id="CardUser" placeholder="西元年末兩碼"
+                            style="border: 0;" [(ngModel)]="CardValidYear">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-6">
+                    <label for="securityCode" class="form-label form-label">安全碼</label>
+                    <input type="text" class="form-control input-box" id="securityCode" placeholder="999"
+                        [(ngModel)]="CardSafeNumber">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="g-0 nextstep-block">
+        <a routerLink="/Checkout/Checkout3/Checkout31" class="btn btn-block rounded-0 nextstep-block-btn"
+            style="font-size: 20px;" (click)="setInfo2ToService()">下一步</a>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+<div class="container" style="height: 500px;">
+    <div class="row d-flex justify-content-center row-size">
+        <div class="row g-0 d-flex align-items-center p-0">
+            <div class="col-md-6">
+                <div class="login">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h1>會員登入</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color: #EAF0ED;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col d-flex flex-column align-items-center d-block d-md-none">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="btn-group my-4" role="group">
+                                                <button type="button" class="btn rounded-0 connect-btn">
+                                                    <img src="../../assets/img/ic-facebook-logotype.svg"
+                                                        class="img-fluid" width="100px" style="min-height: 54px ;">
+                                                </button>
+                                                <button type="button" class="btn rounded-0 connect-btn">
+                                                    <img src="../../assets/img/ic-google.svg" class="img-fluid"
+                                                        width="100px" style="min-height: 54px ;">
+                                                </button>
+                                                <button type="button" class="btn rounded-0 connect-btn">
+                                                    <img src="../../assets/img/ic-yahoo.svg" class="img-fluid"
+                                                        width="100px" style="min-height: 54px ;">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-4">
+                        <div class="d-flex justify-content-between" style="position: relative;">
+                            <label for="loginEmail" style="position: absolute; top: 22%; left: 5%;">
+                                <i class="fa-solid fa-user" style="color: #3F5D45;"></i>
+                            </label>
+                            <input *ngIf="!isRegister" type="email" class="textbox form-control rounded-0 mb-3"
+                                id="loginEmail" placeholder="電子信箱/手機號碼" [(ngModel)]="username">
+                            <input *ngIf="isRegister" type="email" class="textbox form-control rounded-0 mb-3"
+                                id="loginEmail" placeholder="輸入要註冊的電子信箱/手機號碼" [(ngModel)]="newUsername">
+                        </div>
+                        <div class="d-flex justify-content-between" style="position: relative;">
+                            <label for="loginEmail" style="position: absolute; top: 27%; left: 5%;">
+                                <i class="fa-solid fa-key" style="color: #3F5D45;"></i>
+                            </label>
+                            <input *ngIf="!isRegister" type="password" class="textbox form-control rounded-0"
+                                id="EmailPassword" placeholder="輸入您的密碼" [(ngModel)]="password">
+                            <input *ngIf="isRegister" type="password" class="textbox form-control rounded-0"
+                                id="EmailPassword" placeholder="輸入您要註冊的密碼" [(ngModel)]="newPassword">
+                        </div>
+                        <ng-container>
+                            <div *ngIf="accountExistError" style="font-weight: 600; color: red;">
+                                *此帳號或密碼不存在！
+                            </div>
+                            <div *ngIf="haveRegister" style="font-weight: 600; color: red;">
+                                *此帳號已註冊過囉！
+                            </div>
+                            <div *ngIf="!whetherUserPass" style="font-weight: 600; color: red;">
+                                *請輸入帳號密碼！
+                            </div>
+                            <div *ngIf="!whetherUsername" style="font-weight: 600; color: red;">
+                                *帳號沒輸入！
+                            </div>
+                            <div *ngIf="!whetherPassword" style="font-weight: 600; color: red;">
+                                *密碼沒輸入！
+                            </div>
+                            <div *ngIf="!whetherNewUserPass" style="font-weight: 600; color: red;">
+                                *請輸入要註冊的帳號密碼！
+                            </div>
+                            <div *ngIf="!whetherNewUsername" style="font-weight: 600; color: red;">
+                                *要註冊的帳號沒輸入！
+                            </div>
+                            <div *ngIf="!whetherNewPassword" style="font-weight: 600; color: red;">
+                                *要註冊的密碼沒輸入！
+                            </div>
+                        </ng-container>
+                        <div class="form-check mt-3">
+                            <input type="checkbox" class="form-check-input rounded-0" id="RememberMe">
+                            <label for="RememberMe" style="color: white;">記住我</label>
+                        </div>
+                        <button *ngIf="!isRegister" class="btn btn-warning rounded-0" type="button" id="button-addon2"
+                            (click)="registerToggle()">註冊</button>
+                        <button *ngIf="isRegister" class="btn btn-warning rounded-0" type="button" id="button-addon2"
+                            (click)="registerToggle('clean')">返回登入</button>
+                    </div>
+                    <div *ngIf="!isRegister" class="login-btn">
+                        <button class="btn btn-block rounded-0 login-btn-a" (click)="login()">登入帳號</button>
+                    </div>
+                    <div *ngIf="isRegister" class="login-btn">
+                        <button class="btn btn-block rounded-0 login-btn-a" (click)="register()">註冊帳號</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-none d-md-block" style="background-color: #EAF0ED;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col d-flex flex-column align-items-center">
+                            <h3 style="color:#8DA291; padding: 15px; padding-top: 30px;">連結社群帳戶</h3>
+                            <div class="row">
+                                <div class="col-12 pb-3">
+                                    <button class="btn btn-block connect-btn p-0">
+                                        <img src="../../assets/img/ic-facebook-logotype.svg" class="img-fluid"
+                                            width="100px" style="min-height: 54px ;">
+                                    </button>
+                                </div>
+                                <div class="col-12 pb-3">
+                                    <button class="btn btn-block connect-btn p-0">
+                                        <img src="../../assets/img/ic-google.svg" class="img-fluid" width="100px"
+                                            style="min-height: 54px ;">
+                                    </button>
+                                </div>
+                                <div class="col-12 pb-3">
+                                    <button class="btn btn-block connect-btn p-0">
+                                        <img src="../../assets/img/ic-yahoo.svg" class="img-fluid" width="100px"
+                                            style="min-height: 54px ;">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

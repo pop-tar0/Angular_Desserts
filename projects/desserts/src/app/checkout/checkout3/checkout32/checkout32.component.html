@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="form-block p-3">
+        <div class="form-row p-3">
+            <div class="col"><span class="page-title">發票</span></div>
+            <div class="col d-flex justify-content-between align-items-center progress-line"
+                style="position: relative;">
+                <div class="dot-complete">
+                    <div class="dot-check" style="position: relative;">
+                        <i class="fa-solid fa-check" style="color: #3F5D45;"></i>
+                    </div>
+                </div>
+                <div class="dot-complete">
+                    <div class="dot-check" style="position: relative;">
+                        <i class="fa-solid fa-check" style="color: #3F5D45;"></i>
+                    </div>
+                </div>
+                <div class="dot">
+                    <div class="dot-active"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row g-0 mb-4">
+                <div class="col-6"><a routerLink="/Checkout/Checkout3/Checkout31"
+                        class="btn btn-block invoice-btn">電子發票</a>
+                </div>
+                <div class="col-6"><a routerLink="/Checkout/Checkout3/Checkout32"
+                        class="btn btn-block invoice-btn active">發票郵寄</a></div>
+            </div>
+
+            <label for="address" class="form-label form-label">地址</label>
+            <div class="form-row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <select class="form-control rounded-0 input-box" name="city" id="city" [(ngModel)]="receiveCity"
+                            (change)="onCityChange()">
+                            <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <select class="form-control rounded-0 input-box" name="district" id="district"
+                            [(ngModel)]="receiveBlock">
+                            <option *ngFor="let district of availableDistricts" [value]="district">{{ district }}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col mb-2">
+                    <input type="text" class="form-control input-box" id="address" placeholder="幸福路520號">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="taxID" class="form-label form-label">統一編號 (選填)</label>
+                        <input type="text" class="form-control input-box" id="taxID" placeholder="12345678">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="g-0 nextstep-block">
+        <a routerLink="/Checkout_Success" class="btn btn-block rounded-0 nextstep-block-btn" style="font-size: 20px;"
+            (click)="onSubmitCart()">確認結帳</a>
+    </div>
+</div>

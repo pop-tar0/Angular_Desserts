@@ -1,0 +1,100 @@
+<ng-container>
+    <div class="loading" *ngIf="isLoading" aria-hidden="true">
+        <i class="fa fa-spinner fa-spin loading-icon" aria-hidden="true" style="height: 16px;"></i>
+        <p>Loading...</p>
+    </div>
+</ng-container>
+<div class="container" *ngIf="!isLoading" [style.min-height.px]="calculateContainerHeight()">
+    <div class="row">
+        <div class="col-md-8 g-0 px-md-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 cart-title p-3 mb-4">
+                        <div class="text-center">
+                            您的購物車
+                        </div>
+                    </div>
+                    <div class="col-12 mb-4" *ngFor="let item of cartItems; let i = index;">
+                        <div class="row d-flex">
+                            <div class="col-md-3 col-8 d-flex">
+                                <div class="bg-cover"
+                                    [style.background-image]="'url(data:image/png;base64,' + item.img + ')'">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-4 d-flex justify-content-between">
+                                <div class="row d-flex">
+                                    <div class="col-md-7 col-12 d-flex">
+                                        <div class="d-flex flex-column justify-content-center product-info">
+                                            <span>{{ item.name }}</span>
+                                            <span>{{ item.price }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-12 d-flex">
+                                        <div class="input-group align-items-center product-info row-quantity">
+                                            <button class="btn listgroup rounded-0 btn-minus" type="button"
+                                                (click)="updateQuantity(item, item.orderQuantity - 1)">-</button>
+                                            <input type="text"
+                                                class="form-control listgroup-input listgroup text-center amount-textbox"
+                                                [(ngModel)]="item.orderQuantity" name="orderQuantity"
+                                                (ngModelChange)="updateQuantity(item, $event)">
+                                            <button class="btn listgroup rounded-0 btn-plus" type="button"
+                                                (click)="updateQuantity(item, +item.orderQuantity + 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-block d-md-none">
+                                <hr class="d-block d-md-none mt-3">
+                            </div>
+                            <div class="col-md-3 d-flex justify-content-end">
+                                <div class="row align-items-center">
+                                    <div class="col d-flex align-items-center">
+                                        <span class="mr-auto product-price-total" [(ngModel)]="item.price">NT
+                                            ${{ item.onePrice }}</span>
+                                        <a routerLink="/Cart" class="btn" (click)="removeItem(item)">
+                                            <i class=" fa-solid fa-trash" style="color: #45494f;"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-block d-md-none">
+                                <hr class="d-block d-md-none mt-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="order-block p-3">
+                    <div class="col-12 py-3">
+                        <p class="text-center h2" style="font-size: 20px; font-weight: bold;">訂單摘要</p>
+                        <hr class="hr">
+                    </div>
+                    <div class="col-12 d-flex justify-content-between p-2 pt-0">
+                        <span>小計</span>
+                        <span>NT ${{ totalProductPrice }}</span>
+                    </div>
+                    <div class="col-12 d-flex justify-content-between p-2">
+                        <span>運費</span>
+                        <span>NT $300</span>
+                    </div>
+                    <div class="col-12 d-flex justify-content-between p-2">
+                        <span style="font-size: 20px; font-weight: bold;">總計</span>
+                        <span style="font-size: 20px; font-weight: bold;" value="price_total">NT ${{ totalPrice
+                            }}</span>
+                    </div>
+                </div>
+                <div class="g-0 bill-block">
+                    <a routerLink="/Cart" class="btn btn-block rounded-0 bill-block-btn" style="font-size: 20px;"
+                        (click)="batchUpdateUserCart()">結帳</a>
+                </div>
+                <div *ngIf="!isCart" style="color: red; font-weight: 600; margin-top: 2px;" aria-hidden="true">
+                    *購物車沒商品不得結帳</div>
+                <div *ngIf="!isAccount" style="color: red; font-weight: 600; margin-top: 2px;" aria-hidden="true">
+                    *請輸入購買數量</div>
+            </div>
+        </div>
+    </div>
+</div>

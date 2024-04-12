@@ -1,0 +1,85 @@
+<ng-container>
+    <div class="loading" *ngIf="isLoading" aria-hidden="true">
+        <i class="fa fa-spinner fa-spin loading-icon" aria-hidden="true" style="height: 16px;"></i>
+        <p>Loading...</p>
+    </div>
+</ng-container>
+<div class="container g-0" *ngIf="!isLoading">
+    <div class="header">
+        <div class="bg-cover header-img d-flex flex-row-reverse">
+            <img class="m-5 header-text" src="../../../assets/img/lg-想吃甜點是不需要理由的.svg">
+        </div>
+    </div>
+</div>
+<div class="container g-0" *ngIf="!isLoading" style="margin-bottom: 50px;">
+    <div class="row">
+        <div class="col-md-4 g-0">
+            <div>
+                <h2 class="content-list-title">甜點類別</h2>
+                <div class="list-group">
+                    <a routerLink="/Products" class="list-group-item list-group-item-action list-a"
+                        *ngFor="let item of products" (click)="setActiveProduct(item.typeId)"
+                        [ngClass]="{'active': item.typeId === activeProductId}">
+                        {{ item.typeName }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 ff">
+            <div class="container">
+                <ng-container *ngIf="!isProduct" aria-hidden="true"></ng-container>
+                <div class="row flex-wrap" *ngIf="isProduct">
+                    <div class="col-md-6 py-3" *ngFor="let product of displayProducts;">
+                        <div class="card rounded-0" style="border: 1px solid rgba(181, 181, 181, 0.2);">
+                            <div class="product-card-tag">
+                                <span>{{ getTypeName(product.type_id) }}</span>
+                            </div>
+                            <div class="bg-cover" style="height: 315px;"
+                                [style.background-image]="'url(data:image/png;base64,' + product.img + ')'">
+                                <label>
+                                    <input type="checkbox" class="ui-checkbox">
+                                    <i class="fa-solid fa-heart fa-lg starred-icon" style="color: #3F5D45;"></i>
+                                    <i class="fa-regular fa-heart fa-lg unstarred-icon" style="color: #3F5D45;"></i>
+                                </label>
+                            </div>
+                            <div class="d-flex" style="height: 60px;">
+                                <div class="col product-card-fontsize"
+                                    style="border-right: 1px solid rgba(181, 181, 181, 0.3);">{{ product.name }}</div>
+                                <div class="col product-card-fontsize" style="font-weight: bold;">NT ${{ product.price
+                                    }}</div>
+                            </div>
+                            <div class="card-footer p-0" style="background: #EAF0ED;">
+                                <a routerLink="/Product" class="btn btn-lg btn-block"
+                                    style=" font-size: 24px; color: #3F5D45;"
+                                    (click)="addUserCart(product.product_id, 1, typeId)">加入購物車</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="d-flex justify-content-center mb-5" *ngIf="isProduct">
+                <ul class="pagination pagination-lg mt-5">
+                    <li class="page-item">
+                        <a class="page-link rounded-0" routerLink="/Products" (click)="changePage(currentPage - 1)"
+                            [ngClass]="{'disabled-link': !isPreBtnDisable}">
+                            <span>«</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of getPageNumber()" [class.active]="currentPage === page">
+                        <a class="page-link" routerLink="/Products" (click)="changePage(page)">
+                            {{ page }}
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0" routerLink="/Products" (click)="changePage(currentPage + 1)"
+                            [ngClass]="{'disabled-link': !isNextBtnDisable}">
+                            <span>»</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
